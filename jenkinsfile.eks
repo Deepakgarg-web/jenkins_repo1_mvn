@@ -1,44 +1,43 @@
 pipeline {
     agent any
-    tools { 
-        maven 'Maven 3.3.9' 
-        
+    tools {
+        maven 'M2_HOME'
+       
     }
+
     stages {
         stage('Hello') {
             steps {
                 echo 'Hello World'
             }
-        }
-
-        stage('SCM Checkout')  {
-            steps {
-                git credentialsId: 'githuncredentails', url: 'https://github.com/dscorpian29/spring-jenkins-project.git'
-            }
-        } 
-
-        stage('Compile') {
-            steps {
-                sh label: '', script: 'mvn clean compile'
+       }
+        stage('git checkout'){
+            steps{
+                git credentialsId: '8232fcbc-ed44-4a7f-b969-4ff175fa4b9d', url: 'https://github.com/Deepakgarg-web/jenkins_repo1_mvn.git'
             }
         }
 
-        stage('Application_Unit_Test'){
-            steps {
+        stage('maven compile'){
+            steps{
+                sh label: '', script: 'mvn clean compile '
+            }
+        }
+        stage('application junit testcases'){
+            steps{
                 sh label: '', script: 'mvn compiler:testCompile -Dfilename=testng-unit.xml surefire:test'
             }
             post{
                 always{
                     step([$class: 'Publisher'])
-                }
+            }
             }
         }
-
-        stage('Package'){
-            steps {
-                sh label: '', script: 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@52.55.54.236:/opt/tomcat/webapps'
-            }
+    stage('Package'){
+        steps
+        {
+            sh label: '', script: 'mvn clean package -Dskiptests'
         }
     }
 
+}
 }
