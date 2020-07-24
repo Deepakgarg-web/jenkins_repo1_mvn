@@ -14,7 +14,7 @@ pipeline {
 
         stage('SCM Checkout')  {
             steps {
-                git credentialsId: 'githuncredentails', url: 'https://github.com/Deepakgarg-web/jenkins_repo1_mvn.git'
+                git credentialsId: '8232fcbc-ed44-4a7f-b969-4ff175fa4b9d', url: 'https://github.com/Deepakgarg-web/jenkins_repo1_mvn.git'
             }
         } 
 
@@ -36,7 +36,7 @@ pipeline {
 		steps {
         withCredentials([usernamePassword(credentialsId: 'gargdeepak', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
     	sh 'docker login -u $USER -p $PASSWORD'
-	sh 'docker push dscorpian/spring-project:0.0.1'
+	sh 'docker push gargdeepak/spring-project:0.0.1'
 }
 	  }
               
