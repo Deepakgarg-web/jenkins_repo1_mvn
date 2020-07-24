@@ -27,7 +27,7 @@ pipeline {
 		 
 		stage('Build Docker Imager'){
 		steps {
-        sh 'docker build -t Deepakgarg-web/spring-project:0.0.1 .'
+        sh 'docker build -t deepakgarg/spring-project:0.0.1 .'
 	  }
               
 		} 
@@ -36,7 +36,7 @@ pipeline {
 		steps {
         withCredentials([usernamePassword(credentialsId: 'gargdeepak', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
     	sh 'docker login -u $USER -p $PASSWORD'
-	sh 'docker push gargdeepak/spring-project:0.0.1'
+	sh 'docker push deepakgarg/spring-project:0.0.1'
 }
 	  }
               
