@@ -27,7 +27,7 @@ pipeline {
 		 
 		stage('Build Docker Imager'){
 		steps {
-        sh 'docker build -t Deepakgarg-web/jenkins_repo1_mvn .'
+        sh 'docker build -t Deepakgarg-web/spring-project:0.0.1 .'
 	  }
               
 		} 
