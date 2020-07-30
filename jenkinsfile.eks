@@ -27,16 +27,16 @@ pipeline {
 		 
 		stage('Build Docker Imager'){
 		steps {
-        sh 'docker build -t deepakgarg/spring-project:0.0.1 .'
+        sh 'docker build -t gargdeepak/spring-project:0.0.1 .'
 	  }
               
 		} 
 		
 		stage('Push docker image'){
 		steps {
-        withCredentials([usernamePassword(credentialsId: 'gargdeepak', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
+        withCredentials([usernamePassword(credentialsId: 'Docker_id', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
     	sh 'docker login -u $USER -p $PASSWORD'
-	sh 'docker push deepakgarg/spring-project:0.0.1'
+	sh 'docker push gargdeepak/spring-project:0.0.1'
 }
 	  }
               
@@ -44,7 +44,7 @@ pipeline {
 		stage('Run Docker container '){
 		steps {
        
-    	sh 'docker run -it -d --name webapp -p 8090:8080 dscorpian/spring-project:0.0.1 '
+    	sh 'docker run -it -d --name webapp -p 8090:8080 gargdeepak/spring-project:0.0.1 '
 	
 
 	  }
