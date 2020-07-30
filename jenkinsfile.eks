@@ -27,7 +27,7 @@ pipeline {
 		 
 		stage('Build Docker Imager'){
 		steps {
-        sh 'docker build -t gargdeepak/spring-project:0.0.1 .'
+        sh 'sudo docker build -t gargdeepak/spring-project:0.0.1 .'
 	  }
               
 		} 
